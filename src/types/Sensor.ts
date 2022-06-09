@@ -1,14 +1,12 @@
-import { Threshold } from "./IThreshold";
-
 export default class Sensor {
     name: string;
     mqttName: string;
     minVal: number;
     maxVal: number;
     unit: string;
-    threshold: Threshold;
+    threshold: Map<number,string>;
 
-    constructor(name:string,mqttName:string, minVal:number,maxVal:number,unit:string,threshold: Threshold) {
+    constructor(name:string,mqttName:string, minVal:number,maxVal:number,unit:string,threshold: Map<number,string>) {
         this.name = name;
         this.mqttName = mqttName;
         this.minVal = minVal;

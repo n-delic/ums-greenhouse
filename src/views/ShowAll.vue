@@ -3,7 +3,7 @@
         <h1 class="col-span-6 m-1">Reading</h1>
         <CardComponent v-for="sensor of sensors" :key="sensor.name" :value="values[sensor.mqttName]" :info="sensor" class="md:col-span-2 col-span-6"></CardComponent>
         <h1 class="col-span-6 m-1">Control</h1>
-        <CardComponent v-for="control of controls" :key="control.name" :info="control" control :value="values[control.mqttName]" class="md:col-span-3 col-span-6"></CardComponent>
+        <CardComponent v-for="control of controls" :key="control.name" :info="control" control :value="values[control.mqttName]" @controlUpdate="sendToServer" class="md:col-span-3 col-span-6"></CardComponent>
     </div>
 </template>
 
@@ -28,6 +28,10 @@ export default class ShowAll extends Vue {
         'VAL': 0
     };
 
+    sendToServer(message: string) {
+        this.mqttClient.publish('ums/greenhouse/esp',message);
+    }
+
     mounted() {
         this.mqttClient.on("message", (topic: string, payload: Buffer) => {
             let message = parseMessage(payload.toString());
@@ -36,7 +40,7 @@ export default class ShowAll extends Vue {
         });
 
         this.controls.forEach(control=>{
-            this.mqttClient.publish("ums/greenhouse",`${control.mqttName}#S`);
+            this.mqttClient.publish("ums/greenhouse/esp",`${control.mqttName}#S`);
         });
     }
 

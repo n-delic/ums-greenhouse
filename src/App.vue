@@ -47,17 +47,13 @@ export default class App extends Vue {
   isVisible = false;
 
   mounted() {
-    console.log(this.client.connected);
-    
-    // if (this.client.connected) {
       this.isVisible = true;
-      this.client.subscribe("ums/greenhouse");
-    // }
+      this.client.subscribe("ums/greenhouse/web");
     setTimeout(()=>this.isVisible=false,2000);
     window.addEventListener('resize', this.checkMobile);
   }
   beforeDestroy() {
-    this.client.unsubscribe("ums/greenhouse");
+    this.client.unsubscribe("ums/greenhouse/web");
     window.removeEventListener('resize', this.checkMobile);
   }
 

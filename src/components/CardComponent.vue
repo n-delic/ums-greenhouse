@@ -14,7 +14,7 @@
     <div v-if="control && !graph" class="card-body justify-center items-center">
       <div class="pt-5 w-full border-t-4 border-red-300"></div>
       <h1>{{value == 1 ? 'RUNNING' : 'NOT RUNNING'}}</h1>
-      <input type="checkbox" class="toggle" />
+      <input type="checkbox" class="toggle" :checked="value" @input="updateControl"/>
       <h1 class="card-title">{{ info.name.toString() }}</h1>
     </div>
 
@@ -30,6 +30,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Sensor from '@/types/Sensor';
+import { createMessage } from '@/utils/MessageUtils';
 
 @Component
 export default class CardComponent extends Vue {
@@ -37,6 +38,12 @@ export default class CardComponent extends Vue {
   @Prop(Number) readonly value!: number;
   @Prop(Boolean) readonly control!: boolean;
    @Prop(Boolean) readonly graph!: boolean;
+
+  updateControl(e: any) {
+    const status = e.target.checked;
+    const message = createMessage(this.info,status);
+    this.$emit('controlUpdate',message);
+  }
 }
 </script>
 

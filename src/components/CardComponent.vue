@@ -21,7 +21,6 @@
 
      <div v-if="graph" class="card-body justify-center items-center">
       <h1>I ko smo mi?</h1>
-      <GraphChart></GraphChart>
     </div>
   </div>
 
@@ -31,9 +30,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Sensor from '@/types/Sensor';
-import GraphChart from './GraphChart.vue';
 
-@Component({components:{GraphChart}})
+@Component
 export default class CardComponent extends Vue {
   @Prop() readonly info!: Sensor;
   @Prop(Number) readonly value!: number;

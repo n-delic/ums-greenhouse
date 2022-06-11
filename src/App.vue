@@ -1,7 +1,7 @@
 <template>
   <div id="app" data-theme="lofi">
-
-    <NavBar @clicked="isClicked = !isClicked"></NavBar>
+    <NavBar @clicked="isClicked = !isClicked" :connected="client.connected"></NavBar>
+    
     <div class="flex lg:h-screen justify-center items-center">
       <div class="flex-shrink">
         <MenuComponent class="ease-in-out transition-all duration-300"
@@ -13,13 +13,7 @@
       </div>
     </div>
 
-    <div class="absolute top-2 right-32 transition-all" v-if="isVisible" >
-      <div class="alert shadow-lg" :class="client.connected ? 'alert-success' : 'alert-danger'">
-        <div>
-          <span>{{client.connected ? 'Connected successfully to MQTT' : 'Having trouble connecting to MQTT'}}</span>
-        </div>
-      </div>
-    </div>
+    
   </div>
 </template>
 
@@ -49,7 +43,7 @@ export default class App extends Vue {
   mounted() {
       this.isVisible = true;
       this.client.subscribe("ums/greenhouse/web");
-    setTimeout(()=>this.isVisible=false,2000);
+    // setTimeout(()=>this.isVisible=false,2000);
     window.addEventListener('resize', this.checkMobile);
   }
   beforeDestroy() {

@@ -22,6 +22,9 @@
             </router-link>
         </div>
         <div class="flex-auto justify-end mr-3">
+            <div class="tooltip tooltip-bottom" :data-tip="connected ? 'Connected' : 'Disconnected'">
+                <button class="btn btn-circle mr-3 border-0" :style="connected ? 'background-color: #097969;' : 'background-color:#D22B2B;'"></button>
+            </div>
             <label for="about-modal" class="btn btn-ghost bg-secondary rounded-full drop-shadow">
                 <p class="text-primary-content">about.</p>
             </label>
@@ -37,6 +40,7 @@ import AboutModal from './AboutModal.vue';
 @Component({ components: { AboutModal } })
 export default class NavBar extends Vue {
     showXIcon = false;
+    @Prop(Boolean) connected!: boolean;
 
     onClicked(e: any) {
         this.showXIcon = !this.showXIcon;

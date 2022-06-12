@@ -1,5 +1,5 @@
 <template>  
-    <apex-chart class="w-full" type="area" :options="options" :series="series"></apex-chart>
+    <apex-chart class="w-80" type="area" :options="options" :series="series"></apex-chart>
 </template>
 
 <script lang="ts">

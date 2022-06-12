@@ -1,6 +1,6 @@
 <template>
   <div id="app" data-theme="lofi">
-    <NavBar @clicked="isClicked = !isClicked" :connected="client.connected"></NavBar>
+    <NavBar @clicked="isClicked = !isClicked" :isMobile="isMobile" :connected="client.connected"></NavBar>
     
     <div class="flex lg:h-screen justify-center items-center">
       <div class="flex-shrink">
@@ -38,12 +38,9 @@ export default class App extends Vue {
   client: MqttClient = mqttConnect("wss://test.mosquitto.org:8081/");
   isClicked = false;
   isMobile = false;
-  isVisible = false;
 
   mounted() {
-      this.isVisible = true;
       this.client.subscribe("ums/greenhouse/web");
-    // setTimeout(()=>this.isVisible=false,2000);
     window.addEventListener('resize', this.checkMobile);
   }
   beforeDestroy() {

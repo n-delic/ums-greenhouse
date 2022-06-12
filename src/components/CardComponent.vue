@@ -20,7 +20,7 @@
 
 
      <div v-if="graph" class="card-body justify-center items-center">
-      <GraphComponent :type="info.mqttName"></GraphComponent>
+      <GraphComponent :sensorInfo="info"></GraphComponent>
     </div>
   </div>
 

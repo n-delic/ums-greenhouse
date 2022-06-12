@@ -5,29 +5,35 @@
 </template>
 
 <script lang="ts">
+import Sensor from '@/types/Sensor';
 import {Vue,Component,Prop} from 'vue-property-decorator';
 
 @Component
 export default class GraphComponent extends Vue {
-    @Prop(String) type!: string;
-    series: any = [{
-        name: `Temperature`,
+    @Prop(Sensor) sensorInfo!: Sensor;
+    series: any; 
+    options: any;
+    
+    created() {
+    this.series =  [{
+        name: this.sensorInfo.name,
         data: []
     }];
-    options: any = {
+    this.options = {
         chart: {
-            id: `${this.type}-chart`
+            id: `${this.sensorInfo.mqttName}-chart`
         },
         xaxis: {
             categories: []
         }
     };
+    }
 
     async mounted() {
-        let request = await fetch(`http://localhost:3000/${this.type}/7`);
+        let request = await fetch(`http://localhost:3000/${this.sensorInfo.mqttName}/7`);
         let data = await request.json();
         data.forEach((thing: any) => {
-            this.series[0].data.push(thing.temperature); 
+            this.series[0].data.push(thing.value); 
             this.options.xaxis.categories.push(thing.date);
         });
     }

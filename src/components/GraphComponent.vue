@@ -1,6 +1,6 @@
 <template>
-  <div>
-      <apex-chart width="380" type="line" :options="options" :series="series"></apex-chart>
+  <div >
+      <apex-chart class="w-max" type="area" :options="options" :series="series"></apex-chart>
   </div>
 </template>
 

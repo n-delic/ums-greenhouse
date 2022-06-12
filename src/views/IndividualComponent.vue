@@ -15,6 +15,7 @@ import CardComponent from '../components/CardComponent.vue';
 import { sensorInfo } from '@/utils/Sensors';
 import { MqttClient } from 'mqtt/dist/mqtt.min';
 import { parseMessage } from '@/utils/MessageUtils';
+import { set } from 'vue/types/umd';
 
 @Component({
     components: {
@@ -35,6 +36,9 @@ export default class IndividualComponent extends Vue {
     mounted() {
         this.mqttClient.on("message", (topic: string, payload: Buffer) => {
             let message = parseMessage(payload.toString());
+            if(message.sensor == 'GHUM') {
+                message.value = Math.floor(message.value/700);
+            }
             this.value = message.sensor == this.currSensorInfo.mqttName ? message.value : this.value;
         });
     }

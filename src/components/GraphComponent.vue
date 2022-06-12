@@ -1,5 +1,5 @@
 <template>  
-    <apex-chart class="w-80" type="area" :options="options" :series="series"></apex-chart>
+    <apex-chart class="graph" type="area" :options="options" :series="series"></apex-chart>
 </template>
 
 <script lang="ts">
@@ -38,6 +38,14 @@ export default class GraphComponent extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
+.graph {
+    width: 900px;
+}
 
+@media only screen and (max-width: 600px)  {
+    .graph {
+        width: 100vw;
+    }
+}
 </style>

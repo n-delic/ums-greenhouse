@@ -35,7 +35,9 @@ export default class ShowAll extends Vue {
     mounted() {
         this.mqttClient.on("message", (topic: string, payload: Buffer) => {
             let message = parseMessage(payload.toString());
-            console.log(message);
+            if(message.sensor == 'GHUM') {
+                message.value = Math.floor(message.value / 700);
+            }
             this.values[message.sensor] = message.value;
         });
 

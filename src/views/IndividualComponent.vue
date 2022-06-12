@@ -1,9 +1,11 @@
 <template>
-    <div class="grid h-screen justify-items-center gap-2 m-5 font-sans text-2xl font-bold grid-cols-4 ">
-        <h1 class="col-span-4 m-1">{{ currSensorInfo.name }}</h1>
-        <CardComponent :info="currSensorInfo" :value="value" class="md:col-span-2 col-span-4"></CardComponent>
-        <CardComponent :info="currSensorInfo" graph class="md:col-span-2 col-span-4"></CardComponent>
+<div class="flex h-screen items-center justify-center">
+    <div class="grid justify-center items-center gap-2 m-5 grid-cols-4 ">
+        <h1 class="col-span-4 m-1 font-sans text-2xl font-bold">{{ currSensorInfo.name }}</h1>
+        <CardComponent :info="currSensorInfo" :value="value" class="col-span-4"></CardComponent>
+        <CardComponent :info="currSensorInfo" graph class="col-span-4"></CardComponent>
     </div>
+</div>
 </template>
 
 <script lang="ts">

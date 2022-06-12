@@ -1,7 +1,5 @@
-<template>
-  <div >
-      <apex-chart class="w-max" type="area" :options="options" :series="series"></apex-chart>
-  </div>
+<template>  
+    <apex-chart class="w-full" type="area" :options="options" :series="series"></apex-chart>
 </template>
 
 <script lang="ts">

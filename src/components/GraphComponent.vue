@@ -30,7 +30,7 @@ export default class GraphComponent extends Vue {
     }
 
     async mounted() {
-        let request = await fetch(`http://gh.nakii.tech/${this.sensorInfo.mqttName}/7`);
+        let request = await fetch(`https://gh.nakii.tech/${this.sensorInfo.mqttName}/7`);
         let data = await request.json();
         data.forEach((thing: any) => {
             this.series[0].data.push(thing.value); 

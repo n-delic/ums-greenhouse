@@ -20,7 +20,7 @@
 
 
      <div v-if="graph" class="card-body justify-center items-center">
-      <h1>I ko smo mi?</h1>
+      <GraphComponent :type="info.mqttName"></GraphComponent>
     </div>
   </div>
 
@@ -32,8 +32,9 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import Sensor from '@/types/Sensor';
 import { createMessage } from '@/utils/MessageUtils';
 import { generateColor } from '@/utils/ColorUtils';
+import GraphComponent from '@/components/GraphComponent.vue';
 
-@Component
+@Component({components:{GraphComponent}})
 export default class CardComponent extends Vue {
   @Prop() readonly info!: Sensor;
   @Prop(Number) value!: number;

@@ -8,7 +8,7 @@
           :class="isClicked && !isMobile ? 'w-full opacity-100' : 'w-0 opacity-0'"></MenuComponent>
         <MenuModal></MenuModal>
       </div>
-      <div class="flex-1 flex-grow">
+      <div class="flex-1 h-screen flex-grow">
         <router-view :key="$route.path" :mqttClient="client" />
       </div>
     </div>

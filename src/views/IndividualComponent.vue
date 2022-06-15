@@ -32,12 +32,16 @@ export default class IndividualComponent extends Vue {
         this.title = this.$route.params.component;
         this.currSensorInfo = sensorInfo.find((val) => val.mqttName == this.title) as Sensor;
     }
+    
+    map_range(value:number,low1:number,high1:number,low2:number,high2:number) {
+        return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+    }
 
     mounted() {
         this.mqttClient.on("message", (topic: string, payload: Buffer) => {
             let message = parseMessage(payload.toString());
             if(message.sensor == 'GHUM') {
-                message.value = Math.floor(message.value/700);
+                message.value = Math.floor(this.map_range(message.value,1024,700,0,100));
             }
             this.value = message.sensor == this.currSensorInfo.mqttName ? message.value : this.value;
         });

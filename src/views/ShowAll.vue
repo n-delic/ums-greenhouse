@@ -31,12 +31,16 @@ export default class ShowAll extends Vue {
     sendToServer(message: string) {
         this.mqttClient.publish('ums/greenhouse/esp',message);
     }
+    
+    map_range(value:number,low1:number,high1:number,low2:number,high2:number) {
+        return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+    }
 
     mounted() {
         this.mqttClient.on("message", (topic: string, payload: Buffer) => {
             let message = parseMessage(payload.toString());
             if(message.sensor == 'GHUM') {
-                message.value = Math.floor(message.value / 700);
+                message.value = Math.floor(this.map_range(message.value,1024,700,0,100));
             }
             this.values[message.sensor] = message.value;
         });

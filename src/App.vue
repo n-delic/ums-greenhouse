@@ -1,19 +1,19 @@
 <template>
   <div id="app" data-theme="lofi">
     <NavBar @clicked="isClicked = !isClicked" :isMobile="isMobile" :connected="client.connected"></NavBar>
-    
+
     <div class="flex lg:h-screen justify-center items-center">
       <div class="flex-shrink">
         <MenuComponent class="ease-in-out transition-all duration-300"
           :class="isClicked && !isMobile ? 'w-full opacity-100' : 'w-0 opacity-0'"></MenuComponent>
         <MenuModal></MenuModal>
       </div>
-      <div class="flex-1 flex-grow">
+      <div class="flex-1 flex-grow ">
         <router-view :key="$route.path" :mqttClient="client" />
       </div>
     </div>
 
-    
+
   </div>
 </template>
 
